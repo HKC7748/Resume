@@ -3,7 +3,7 @@
     <n-flex vertical justify="space-between" class="personal-information-style" >
       <n-flex class="profile-wrapper">
         <component :is="motion.div" v-bind="profileMotion" class="profile-image">
-          <n-image src="./src/assets/image/profile.jpg" class="profile-image"/>
+          <n-image :src="profileImage" class="profile-image"/>
         </component>
         <component :is="motion.div" v-bind="nameMotion" class="name-text-style">
           <n-text class="name-text-style">{{ personalInformation.name }}</n-text>
@@ -132,6 +132,7 @@ import { motion } from 'motion-v'
 import { NFlex, NImage, NText, NTag, NDivider, NCard, NButton } from 'naive-ui'
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
+import profileImage from './assets/image/profile.jpg'
 
 const profileMotion = ref({
   initial: { scale: 0, opacity: 0, rotate: -180},
