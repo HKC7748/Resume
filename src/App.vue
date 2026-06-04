@@ -3,7 +3,7 @@
     <n-flex vertical justify="space-between" class="personal-information-style" >
       <n-flex class="profile-wrapper">
         <component :is="motion.div" v-bind="profileMotion" class="profile-image">
-          <n-image src="/src/assets/image/profile.jpg" class="profile-image"/>
+          <n-image src="./src/assets/image/profile.jpg" class="profile-image"/>
         </component>
         <component :is="motion.div" v-bind="nameMotion" class="name-text-style">
           <n-text class="name-text-style">{{ personalInformation.name }}</n-text>
