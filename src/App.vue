@@ -130,7 +130,8 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import { NFlex, NImage, NText, NTag, NDivider, NCard, NButton } from 'naive-ui'
-import {ref, onMounted, onUnmounted, Ref} from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import type { Ref } from 'vue'
 
 const profileMotion = ref({
   initial: { scale: 0, opacity: 0, rotate: -180},
