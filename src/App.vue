@@ -101,9 +101,9 @@
           </n-divider>
         </component>
         <component :is="motion.div" v-bind="personalIntroductionCardMotion" class="personal-introduction-card-wrapper-style">
-          <n-card :title="personalInformation.workList[personalInformation.currentWorkIndex].title" class="personal-introduction-card-style">
+          <n-card :title="personalInformation.workList[personalInformation.currentWorkIndex]?.title" class="personal-introduction-card-style">
             <iframe
-                :src="personalInformation.workList[personalInformation.currentWorkIndex].src"
+                :src="personalInformation.workList[personalInformation.currentWorkIndex]?.src"
                 allowfullscreen
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
@@ -118,7 +118,7 @@
                 <n-text>下一个</n-text>
               </n-button>
             </n-flex>
-            <n-text >{{ personalInformation.workList[personalInformation.currentWorkIndex].description }}</n-text>
+            <n-text>{{ personalInformation.workList[personalInformation.currentWorkIndex]?.description }}</n-text>
           </n-card>
         </component>
       </n-flex>
