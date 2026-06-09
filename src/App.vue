@@ -135,39 +135,36 @@ import type { Ref } from 'vue'
 import profileImage from './assets/image/profile.jpg'
 
 const profileMotion = ref({
-  initial: { scale: 0, opacity: 0, rotate: -180},
-  whileInView: { scale: 1, opacity: 1 , rotate: 0},
+  initial: { x: 0, y: 0, scale: 0, opacity: 0, rotate: -180},
+  whileInView: { x: 0, y: 0, scale: 1, opacity: 1 , rotate: 0},
   transition: { duration: 0.5, delay: 0 },
   whileHover: { y: -10, scale: 1.2, boxShadow: '0px 10px 20px rgba(0,0,0,0.2)', rotate: 360}
 })
-
 const nameMotion = ref({
-  initial: { scale: 0, opacity: 0, rotate: -180},
-  whileInView: { scale: 1, opacity: 1 , rotate: 0},
+  initial: { x: 0, y: 0, scale: 0, opacity: 0, rotate: -180},
+  whileInView: { x: 0, y: 0, scale: 1, opacity: 1 , rotate: 0},
   transition: { duration: 0.5, delay: 0 },
 })
-
 const personalInformationCardMotion = ref({
-  initial: { y: 150, opacity: 0 },
-  whileInView: { y: 0, opacity: 1 },
+  initial: { x: 0, y: 150, opacity: 0 },
+  whileInView: { x: 0, y: 0, opacity: 1 },
   transition: { duration: 0.5, delay: 0 },
   whileHover: { y: -10, boxShadow: '0px 10px 20px rgba(0,0,0,0.2)'}
 })
-
 const personalIntroductionDivideMotion = ref({
-  initial: { y: 150, opacity: 0 },
-  whileInView: { y: 0, opacity: 1 },
+  initial: { x: 0, y: 150, opacity: 0 },
+  whileInView: { x: 0, y: 0, opacity: 1 },
   transition: { duration: 0.5, delay: 0 }
 })
 const personalIntroductionCardMotion = ref({
-  initial: { y: 150, opacity: 0 },
-  whileInView: { y: 0, opacity: 1 },
+  initial: { x: 0, y: 150, opacity: 0 },
+  whileInView: { x: 0, y: 0, opacity: 1 },
   transition: { duration: 0.5, delay: 0 },
   whileHover: { y: -10, boxShadow: '0px 10px 20px rgba(0,0,0,0.2)'}
 })
 const personalIntroductionCardTextMotion = ref({
-  initial: {opacity: 0 },
-  whileInView: {opacity: 1 },
+  initial: { x: 0, y: 0, opacity: 0 },
+  whileInView: { x: 0, y: 0, opacity: 1 },
   transition: { duration: 0.5, delay: 0 }
 })
 
@@ -177,6 +174,29 @@ const mainLayout = ref({
 
 const updateLayout = () => {
   mainLayout.value.vertical = window.innerWidth <= 600;
+  if (mainLayout.value.vertical) {
+    profileMotion.value.initial = {x: -150, y: 0, scale: 0, opacity: 0, rotate: -180}
+    nameMotion.value.whileInView = {x: 0, y: 0, scale: 1, opacity: 1 , rotate: 0}
+
+    nameMotion.value.initial = {x: -150, y: 0, scale: 0, opacity: 0, rotate: -180}
+    nameMotion.value.whileInView = {x: 0, y: 0, scale: 1, opacity: 1 , rotate: 0}
+
+    personalInformationCardMotion.value.initial = {x: -150, y: 0, opacity: 0}
+    personalInformationCardMotion.value.whileInView = {x: 0, y: 0, opacity: 1}
+
+    personalIntroductionDivideMotion.value.initial = {x: -150, y: 0, opacity: 0}
+    personalIntroductionDivideMotion.value.whileInView = {x: 0, y: 0, opacity: 1}
+
+    personalIntroductionCardMotion.value.initial = {x: -150, y: 0, opacity: 0}
+    personalIntroductionCardMotion.value.whileInView = {x: 0, y: 0, opacity: 1}
+  }
+  else {
+    profileMotion.value.initial = {x: 0, y: 0, scale: 0, opacity: 0, rotate: -180}
+    nameMotion.value.initial = {x: 0, y: 0, scale: 0, opacity: 0, rotate: -180}
+    personalInformationCardMotion.value.initial = {x: 0, y: 150, opacity: 0}
+    personalIntroductionDivideMotion.value.initial = {x: 0, y: 150, opacity: 0}
+    personalIntroductionCardMotion.value.initial = {x: 0, y: 150, opacity: 0}
+  }
 }
 
 onMounted(() => {
@@ -284,13 +304,13 @@ personalInformation.value.professionalSkillList.push(new TagInformation("建模�
 personalInformation.value.professionalSkillList.push(new TagInformation("BIM工程数字化"))
 personalInformation.value.contactInformationTitle = "📞联系方式"
 personalInformation.value.contactInformationList.push(new TagInformation("📧邮箱:2024903811@chd.edu.cn"))
-personalInformation.value.contactInformationList.push(new TagInformation("📱电话:13976639743"))
+personalInformation.value.contactInformationList.push(new TagInformation("☎电话:13976639743"))
 personalInformation.value.contactInformationList.push(new TagInformation("💬微信:RdJ7748h"))
 personalInformation.value.contactInformationList.push(new TagInformation("🐧QQ:494212901"))
 personalInformation.value.contactInformationList.push(new TagInformation("🐙Github:https://github.com/HKC7748"))
 personalInformation.value.educationExperienceTitle = "🎓教育经历"
-personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级 | 公路学院（在读） | 道路桥梁与渡河工程（国际工程班） | 工学学士",
-  "主修课程:高等数学、大学物理、线性代数、概率论与数理统计、工程力学、结构力学、土木工程制图、工程地质、测量学、混凝土结构设计原理、数据分析与可视化等。"]))
+personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级|公路学院(在读)|道路桥梁与渡河工程(国际工程班)|本科",
+  "主修课程:高等数学、线性代数、概率论与数理统计、工程力学、结构力学、土木工程制图、测量学、混凝土结构设计原理等。"]))
 personalInformation.value.personalSkillTitle = "🔧个人技能"
 personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["💻C#与.NET生态：掌握C#与WPF框架，可开发复杂交互的桌面应用。精通AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
   "🐍Python科学与工程计算：擅长使用NumPy、Pandas等进行多源工程数据处理与可视化分析。能运用PyQt等框架将算法封装为实用工具，并将线性代数、图形学原理转化为实际算法。",
@@ -304,6 +324,7 @@ personalInformation.value.competitionExperienceList.push(new CardInformation("",
   "🥈全国大学生物理实验竞赛 (省一等奖)",
   "🥈全国大学生物理学术竞赛 (省一等奖)"]))
 personalInformation.value.workTitle = "🎬作品展示"
+personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1", "AutoCAD桥梁参数化建模", "这是一个基于AutoCAD的二次开发项目，旨在实现桥梁的三维参数化建模。项目提供了一整套工具集，包含曲线处理、数据库操作、实体变换、扫掠拉伸等底层功能，并基于这些工具开发了针对T型梁、桥墩等桥梁构件的参数化建模服务。项目采用C#开发，架构上融合了工具类、服务层与WPF MVVM模式，用户可通过界面输入参数，快速自动生成复杂的桥梁三维实体模型。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aEui&page=1", "AI桥梁生成工具", "这是一个基于AutoCAD .NET API开发的智能CAD桥梁生成工具。该工具利用本地部署的大模型解析用户自然语言指令，自动调用参数化算法与预设模板，实现桥梁构件的智能生成与装配。核心技术涵盖 AutoCAD .NET API、WPF 界面开发及大模型 API 集成。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1wqVG6CESM&page=1", "质点-弹簧系统振动模拟工具", "这是一个基于Pymunk物理引擎和DearPyGui的质点-弹簧系统振动模拟工具，核心技术包括物理建模、实时模拟、傅里叶分析、数据可视化以及交互式图形界面设计，完整实现了从物理仿真到振动分析的全流程。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1kiVG6VEDm&page=1", "3维地球模型可视化系统", "这是一个利用二维平面模拟并渲染三维地球模型可视化系统。通过数学模型构建球体网格，并应用纹理贴图、三维旋转变换和透视投影，将三维坐标实时计算并绘制到二维的Pygame窗口或Turtle画布中，实现了动态、交互式的三维可视化效果。"))
@@ -311,7 +332,7 @@ personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.b
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1RXVG6aEx5&page=1", "CAD点阵文本生成器", "这是一个基于WPF MVVM架构的AutoCAD二次开发项目，核心技术涉及使用C#和WPF构建图形用户界面，通过MathNet.Numerics进行矩阵运算实现字符到点阵的转换映射，利用AutoCAD .NET API进行三维实体建模，实现了从文本输入到三维立方体阵列的自动化生成功能。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1kqVG6kE18&page=1", "PyQt6图像格式转换工具", "这是一个基于PyQt6的图像格式转换工具，核心技术涉及使用PIL库进行图像处理，通过PyQt6构建图形用户界面实现文件管理、预览和批量操作。系统采用事件驱动架构处理用户交互，实现了图像信息的元数据提取和批量格式转换功能，完整展示了从图像读取到格式转换的完整处理流程。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1CiVG6VEHA&page=1", "SolidWorks乐高车辆模型", "这是很久之前用solidworks做的一个以乐高为原型的车辆,感觉挺好玩的"))
-personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1", "AutoCAD桥梁参数化建模", "这是一个基于AutoCAD的二次开发项目，旨在实现桥梁的三维参数化建模。项目提供了一整套工具集，包含曲线处理、数据库操作、实体变换、扫掠拉伸等底层功能，并基于这些工具开发了针对T型梁、桥墩等桥梁构件的参数化建模服务。项目采用C#开发，架构上融合了工具类、服务层与WPF MVVM模式，用户可通过界面输入参数，快速自动生成复杂的桥梁三维实体模型。"))
+
 
 </script>
 <style scoped>
@@ -329,7 +350,7 @@ personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.b
   margin: 5px auto;
 }
 .personal-information-style{
-  background-color: #2c3e50;
+  background-color: #1f3850;
   flex: 2;
 }
 .personal-introduction-style{
@@ -358,7 +379,7 @@ personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.b
   width: 90%;
 }
 .personal-information-card-style{
-  background-color: #334b6f;
+  background-color: #274766;
 }
 .personal-information-title-text-style{
   font-size: 25px;
