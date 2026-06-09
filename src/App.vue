@@ -309,7 +309,7 @@ personalInformation.value.contactInformationList.push(new TagInformation("💬�
 personalInformation.value.contactInformationList.push(new TagInformation("🐧QQ:494212901"))
 personalInformation.value.contactInformationList.push(new TagInformation("🐙Github:https://github.com/HKC7748"))
 personalInformation.value.educationExperienceTitle = "🎓教育经历"
-personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级|公路学院(在读)|道路桥梁与渡河工程(国际工程班)|本科",
+personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级 | 公路学院 | 道路桥梁与渡河工程(国际工程班) | 本科",
   "主修课程:高等数学、线性代数、概率论与数理统计、工程力学、结构力学、土木工程制图、测量学、混凝土结构设计原理等。"]))
 personalInformation.value.personalSkillTitle = "🔧个人技能"
 personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["💻C#与.NET生态：掌握C#与WPF框架，可开发复杂交互的桌面应用。精通AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
