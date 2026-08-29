@@ -287,43 +287,43 @@ class PersonalInformation {
 
 const personalInformation: Ref<PersonalInformation> = ref(new PersonalInformation())
 personalInformation.value.name = "黄昆程"
-personalInformation.value.basicInformationTitle = "📄基本信息"
-personalInformation.value.basicInformationList.push(new TagInformation("👤姓名:黄昆程"))
-personalInformation.value.basicInformationList.push(new TagInformation("🏛院校:长安大学"))
-personalInformation.value.basicInformationList.push(new TagInformation("🎓学历:2024级 本科"))
-personalInformation.value.basicInformationList.push(new TagInformation("🏗专业:道路桥梁与渡河工程(国际工程班)"))
-personalInformation.value.basicInformationList.push(new TagInformation("✨核心定位：土木工程 + 软件研发复合背景"))
-personalInformation.value.basicInformationList.push(new TagInformation("🎯求职意向：工程软件开发/数字化实习"))
-personalInformation.value.basicInformationList.push(new TagInformation("💼当前状态：在校在读，可实习"))
-personalInformation.value.professionalSkillTitle = "🛠专业技能"
+personalInformation.value.basicInformationTitle = "基本信息"
+personalInformation.value.basicInformationList.push(new TagInformation("姓名:黄昆程"))
+personalInformation.value.basicInformationList.push(new TagInformation("院校:长安大学"))
+personalInformation.value.basicInformationList.push(new TagInformation("学历:2024级 本科"))
+personalInformation.value.basicInformationList.push(new TagInformation("专业:道路桥梁与渡河工程(国际工程班)"))
+personalInformation.value.basicInformationList.push(new TagInformation("核心定位：土木工程 + 软件研发复合背景"))
+personalInformation.value.basicInformationList.push(new TagInformation("求职意向：工程软件开发/数字化实习"))
+personalInformation.value.basicInformationList.push(new TagInformation("当前状态：在校在读，可实习"))
+personalInformation.value.professionalSkillTitle = "专业技能"
 personalInformation.value.professionalSkillList.push(new TagInformation("AutoCAD二次开发"))
 personalInformation.value.professionalSkillList.push(new TagInformation("Web前端开发"))
 personalInformation.value.professionalSkillList.push(new TagInformation("数据建模分析"))
 personalInformation.value.professionalSkillList.push(new TagInformation("力学分析"))
 personalInformation.value.professionalSkillList.push(new TagInformation("建模与可视化"))
 personalInformation.value.professionalSkillList.push(new TagInformation("BIM工程数字化"))
-personalInformation.value.contactInformationTitle = "📞联系方式"
-personalInformation.value.contactInformationList.push(new TagInformation("📧邮箱:2024903811@chd.edu.cn"))
-personalInformation.value.contactInformationList.push(new TagInformation("☎电话:13976639743"))
-personalInformation.value.contactInformationList.push(new TagInformation("💬微信:RdJ7748h"))
-personalInformation.value.contactInformationList.push(new TagInformation("🐧QQ:494212901"))
-personalInformation.value.contactInformationList.push(new TagInformation("🐙Github:https://github.com/HKC7748"))
-personalInformation.value.educationExperienceTitle = "🎓教育经历"
+personalInformation.value.contactInformationTitle = "联系方式"
+personalInformation.value.contactInformationList.push(new TagInformation("邮箱:2024903811@chd.edu.cn"))
+personalInformation.value.contactInformationList.push(new TagInformation("电话:13976639743"))
+personalInformation.value.contactInformationList.push(new TagInformation("微信:RdJ7748h"))
+personalInformation.value.contactInformationList.push(new TagInformation("QQ:494212901"))
+personalInformation.value.contactInformationList.push(new TagInformation("Github:https://github.com/HKC7748"))
+personalInformation.value.educationExperienceTitle = "教育经历"
 personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级 | 公路学院 | 道路桥梁与渡河工程(国际工程班) | 本科",
   "主修课程:高等数学、线性代数、概率论与数理统计、工程力学、结构力学、土木工程制图、测量学、混凝土结构设计原理等。"]))
-personalInformation.value.personalSkillTitle = "🔧个人技能"
-personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["💻C#与.NET生态：掌握C#与WPF框架，可开发复杂交互的桌面应用。精通AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
-  "🐍Python科学与工程计算：擅长使用NumPy、Pandas等进行多源工程数据处理与可视化分析。能运用PyQt等框架将算法封装为实用工具，并将线性代数、图形学原理转化为实际算法。",
-  "📊MATLAB科研与仿真：熟练运用MATLAB进行数值计算、算法开发与数据可视化，能够构建力学领域的仿真模型，服务于科学研究与工程问题分析。",
-  "🌐Web前端开发：掌握Vue.js及相关现代前端技术，能够构建响应式、交互式的数据可视化后台与单页面应用，具备将复杂业务流程转化为清晰前端界面的能力。"]))
-personalInformation.value.personalSkillList.push(new CardInformation("工程建模、可视化与数字化", ["📐工程建模：熟练运用 AutoCAD、Revit、Civil 3D 进行建筑与基础设施的二维制图与三维信息模型搭建；掌握 SketchUp、SolidWorks，具备从概念设计到精细三维模型构建的能力，支持产品、结构与建筑的专业表达。",
-  "🎥可视化呈现：掌握 D5 Render、Enscape 等工具，能将三维模型转化为高质量的效果图、动画及交互式漫游，直接服务于设计展示、方案汇报与数字化交付。"]))
-personalInformation.value.competitionExperienceTitle = "🏆竞赛经历"
-personalInformation.value.competitionExperienceList.push(new CardInformation("", ["🥇中交公规院杯”2025世界大学生桥梁设计大赛 (国三等奖)",
-  "🥈全国大学生先进成图技术与产品信息建模创新大赛 (省第一名)",
-  "🥈全国大学生物理实验竞赛 (省一等奖)",
-  "🥈全国大学生物理学术竞赛 (省一等奖)"]))
-personalInformation.value.workTitle = "🎬作品展示"
+personalInformation.value.personalSkillTitle = "个人技能"
+personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["C#与.NET生态：掌握C#与WPF框架，可开发复杂交互的桌面应用。精通AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
+  "Python科学与工程计算：擅长使用NumPy、Pandas等进行多源工程数据处理与可视化分析。能运用PyQt等框架将算法封装为实用工具，并将线性代数、图形学原理转化为实际算法。",
+  "MATLAB科研与仿真：熟练运用MATLAB进行数值计算、算法开发与数据可视化，能够构建力学领域的仿真模型，服务于科学研究与工程问题分析。",
+  "Web前端开发：掌握Vue.js及相关现代前端技术，能够构建响应式、交互式的数据可视化后台与单页面应用，具备将复杂业务流程转化为清晰前端界面的能力。"]))
+personalInformation.value.personalSkillList.push(new CardInformation("工程建模、可视化与数字化", ["工程建模：熟练运用 AutoCAD、Revit、Civil 3D 进行建筑与基础设施的二维制图与三维信息模型搭建；掌握 SketchUp、SolidWorks，具备从概念设计到精细三维模型构建的能力，支持产品、结构与建筑的专业表达。",
+  "可视化呈现：掌握 D5 Render、Enscape 等工具，能将三维模型转化为高质量的效果图、动画及交互式漫游，直接服务于设计展示、方案汇报与数字化交付。"]))
+personalInformation.value.competitionExperienceTitle = "竞赛经历"
+personalInformation.value.competitionExperienceList.push(new CardInformation("", ["全国大学生先进成图技术与产品信息建模创新大赛 (国一等奖)",
+  "中交公规院杯”2025世界大学生桥梁设计大赛 (国三等奖)",
+  "全国大学生物理实验竞赛 (省一等奖)",
+  "全国大学生物理学术竞赛 (省一等奖)"]))
+personalInformation.value.workTitle = "作品展示"
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1", "AutoCAD桥梁参数化建模", "这是一个基于AutoCAD的二次开发项目，旨在实现桥梁的三维参数化建模。项目提供了一整套工具集，包含曲线处理、数据库操作、实体变换、扫掠拉伸等底层功能，并基于这些工具开发了针对T型梁、桥墩等桥梁构件的参数化建模服务。项目采用C#开发，架构上融合了工具类、服务层与WPF MVVM模式，用户可通过界面输入参数，快速自动生成复杂的桥梁三维实体模型。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aEui&page=1", "AI桥梁生成工具", "这是一个基于AutoCAD .NET API开发的智能CAD桥梁生成工具。该工具利用本地部署的大模型解析用户自然语言指令，自动调用参数化算法与预设模板，实现桥梁构件的智能生成与装配。核心技术涵盖 AutoCAD .NET API、WPF 界面开发及大模型 API 集成。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1wqVG6CESM&page=1", "质点-弹簧系统振动模拟工具", "这是一个基于Pymunk物理引擎和DearPyGui的质点-弹簧系统振动模拟工具，核心技术包括物理建模、实时模拟、傅里叶分析、数据可视化以及交互式图形界面设计，完整实现了从物理仿真到振动分析的全流程。"))
