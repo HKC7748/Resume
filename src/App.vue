@@ -312,10 +312,8 @@ personalInformation.value.educationExperienceTitle = "教育经历"
 personalInformation.value.educationExperienceList.push(new CardInformation("长安大学", ["2024级 | 公路学院 | 道路桥梁与渡河工程(国际工程班) | 本科",
   "主修课程:高等数学、线性代数、概率论与数理统计、工程力学、结构力学、土木工程制图、测量学、混凝土结构设计原理等。"]))
 personalInformation.value.personalSkillTitle = "个人技能"
-personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["C#与.NET生态：掌握C#与WPF框架，可开发复杂交互的桌面应用。精通AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
-  "Python科学与工程计算：擅长使用NumPy、Pandas等进行多源工程数据处理与可视化分析。能运用PyQt等框架将算法封装为实用工具，并将线性代数、图形学原理转化为实际算法。",
-  "MATLAB科研与仿真：熟练运用MATLAB进行数值计算、算法开发与数据可视化，能够构建力学领域的仿真模型，服务于科学研究与工程问题分析。",
-  "Web前端开发：掌握Vue.js及相关现代前端技术，能够构建响应式、交互式的数据可视化后台与单页面应用，具备将复杂业务流程转化为清晰前端界面的能力。"]))
+personalInformation.value.personalSkillList.push(new CardInformation("工程软件开发与集成", ["AutoCAD二次开发：掌握C#与WPF框架，可开发复杂交互的桌面应用。了解AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
+  "科学计算：熟练运用MATLAB和Python进行数值计算、算法开发与数据可视化，能够将线性代数、图形学原理转化为实际算法，服务于科学研究与工程问题分析。"]))
 personalInformation.value.personalSkillList.push(new CardInformation("工程建模、可视化与数字化", ["工程建模：熟练运用 AutoCAD、Revit、Civil 3D 进行建筑与基础设施的二维制图与三维信息模型搭建；掌握 SketchUp、SolidWorks，具备从概念设计到精细三维模型构建的能力，支持产品、结构与建筑的专业表达。",
   "可视化呈现：掌握 D5 Render、Enscape 等工具，能将三维模型转化为高质量的效果图、动画及交互式漫游，直接服务于设计展示、方案汇报与数字化交付。"]))
 personalInformation.value.competitionExperienceTitle = "竞赛经历"
