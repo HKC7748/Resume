@@ -322,12 +322,12 @@ personalInformation.value.competitionExperienceList.push(new CardInformation("",
   "全国大学生物理实验竞赛 (省一等奖)",
   "全国大学生物理学术竞赛 (省一等奖)"]))
 personalInformation.value.workTitle = "作品展示"
-personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1", "AutoCAD桥梁参数化建模", "这是一个基于AutoCAD的二次开发项目，旨在实现桥梁的三维参数化建模。项目提供了一整套工具集，包含曲线处理、数据库操作、实体变换、扫掠拉伸等底层功能，并基于这些工具开发了针对T型梁、桥墩等桥梁构件的参数化建模服务。项目采用C#开发，架构上融合了工具类、服务层与WPF MVVM模式，用户可通过界面输入参数，快速自动生成复杂的桥梁三维实体模型。"))
+personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1", "AutoCAD桥梁参数化建模", "使用C#基于AutoCAD .NET API开发的桥梁参数化设计插件。通过WPF对话框输入T梁、柱式墩等构件参数,自动批量生成三维实体模型与二维构造图;采用Jig拖放交互定位,利用扩展字典持久化参数,支持构件的编辑与更新。设计Core/Tool分层架构,封装命令分发、事件管理、图层样式初始化等公共框架,并提供项目管理器、属性编辑器、日志三个停靠面板,实现桥梁构件的统一管理。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1vXVG6aEui&page=1", "AI桥梁生成工具", "这是一个基于AutoCAD .NET API开发的智能CAD桥梁生成工具。该工具利用本地部署的大模型解析用户自然语言指令，自动调用参数化算法与预设模板，实现桥梁构件的智能生成与装配。核心技术涵盖 AutoCAD .NET API、WPF 界面开发及大模型 API 集成。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1wqVG6CESM&page=1", "质点-弹簧系统振动模拟工具", "这是一个基于Pymunk物理引擎和DearPyGui的质点-弹簧系统振动模拟工具，核心技术包括物理建模、实时模拟、傅里叶分析、数据可视化以及交互式图形界面设计，完整实现了从物理仿真到振动分析的全流程。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1A8j76eEby&page=1", "车辆检测与交通分析系统", "这是一个基于 YOLOv8 的视频车辆检测系统，集成 PySide6 图形界面，支持检测计划配置、高效检测与可视化。核心功能包括车辆检测跟踪、透视/逆透视变换、卡尔曼滤波轨迹拟合，以及车道级时间/空间占有率、流量、排队长度等交通参数的统计分析。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1kiVG6VEDm&page=1", "3维地球模型可视化系统", "这是一个利用二维平面模拟并渲染三维地球模型可视化系统。通过数学模型构建球体网格，并应用纹理贴图、三维旋转变换和透视投影，将三维坐标实时计算并绘制到二维的Pygame窗口或Turtle画布中，实现了动态、交互式的三维可视化效果。"))
-personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1iQVG6AEFA&page=1", "3维图形可视化系统", "这是一个基于Tkinter的3D图形可视化系统，核心技术涉及三维几何建模、坐标变换、视图投影以及深度排序算法以实现正确的遮挡关系。完整演示了计算机图形学中从建模到渲染的基本管线流程。"))
+personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1iQVG6AEFA&page=1", "3维图形可视化系统", "这是一个基于linter的3D图形可视化系统，核心技术涉及三维几何建模、坐标变换、视图投影以及深度排序算法以实现正确的遮挡关系。完整演示了计算机图形学中从建模到渲染的基本管线流程。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1RXVG6aEx5&page=1", "CAD点阵文本生成器", "这是一个基于WPF MVVM架构的AutoCAD二次开发项目，核心技术涉及使用C#和WPF构建图形用户界面，通过MathNet.Numerics进行矩阵运算实现字符到点阵的转换映射，利用AutoCAD .NET API进行三维实体建模，实现了从文本输入到三维立方体阵列的自动化生成功能。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1kqVG6kE18&page=1", "PyQt6图像格式转换工具", "这是一个基于PyQt6的图像格式转换工具，核心技术涉及使用PIL库进行图像处理，通过PyQt6构建图形用户界面实现文件管理、预览和批量操作。系统采用事件驱动架构处理用户交互，实现了图像信息的元数据提取和批量格式转换功能，完整展示了从图像读取到格式转换的完整处理流程。"))
 personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.bilibili.com/player.html?bvid=BV1CiVG6VEHA&page=1", "SolidWorks乐高车辆模型", "这是很久之前用solidworks做的一个以乐高为原型的车辆,感觉挺好玩的"))
@@ -413,7 +413,5 @@ personalInformation.value.workList.push(new BiliBiliVideoInformation("//player.b
 .carousel-video-style {
   width: 100%;
   aspect-ratio: 16 / 9;
-}
-.button-style{
 }
 </style>
