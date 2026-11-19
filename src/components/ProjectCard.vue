@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { NCard, NFlex, NTag, NText } from "naive-ui";
-import type { ProjectItem } from "../data/resume";
+import type { ProjectItem } from "../resume";
 
 defineProps<{
   project: ProjectItem;
