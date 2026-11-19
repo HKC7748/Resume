@@ -1,20 +1,39 @@
 <template>
   <n-flex v-bind="mainLayout" class="main-style">
-    <n-flex vertical justify="space-between" class="personal-information-style">
-      <n-flex class="profile-wrapper">
+    <n-flex
+      vertical
+      justify="start"
+      :size="14"
+      class="personal-information-style"
+    >
+      <n-flex vertical class="profile-wrapper">
         <component
           :is="motion.div"
           v-bind="profileMotion"
           class="profile-image"
         >
-          <n-image :src="profileImage" class="profile-image" />
+          <n-image
+            :src="profileImage"
+            alt="黄昆程"
+            class="profile-image"
+          />
         </component>
         <component :is="motion.div" v-bind="nameMotion" class="name-text-style">
-          <n-text class="name-text-style">{{
-            personalInformation.name
-          }}</n-text>
+          <n-text class="name-text-style">{{ resume.name }}</n-text>
         </component>
+        <n-flex :size="6" justify="center" wrap class="profile-skill-tags">
+          <n-tag
+            v-for="tag in resume.professionalSkillList"
+            :key="tag"
+            :bordered="false"
+            size="small"
+            class="profile-skill-tag"
+          >
+            {{ tag }}
+          </n-tag>
+        </n-flex>
       </n-flex>
+
       <component
         :is="motion.div"
         v-bind="personalInformationCardMotion"
@@ -22,21 +41,22 @@
       >
         <n-card class="personal-information-card-style">
           <n-flex vertical>
-            <n-text class="personal-information-title-text-style">{{
-              personalInformation.basicInformationTitle
-            }}</n-text>
+            <n-text class="personal-information-title-text-style">
+              {{ resume.basicInformationTitle }}
+            </n-text>
             <n-divider class="personal-information-divider-style" />
             <n-flex
-              v-for="tag in personalInformation.basicInformationList"
-              :key="tag.tagText"
+              v-for="item in resume.basicInformationList"
+              :key="item"
             >
-              <n-text class="personal-information-text-style">{{
-                tag.tagText
-              }}</n-text>
+              <n-text class="personal-information-text-style">
+                {{ item }}
+              </n-text>
             </n-flex>
           </n-flex>
         </n-card>
       </component>
+
       <component
         :is="motion.div"
         v-bind="personalInformationCardMotion"
@@ -44,244 +64,192 @@
       >
         <n-card class="personal-information-card-style">
           <n-flex vertical>
-            <n-text class="personal-information-title-text-style">{{
-              personalInformation.professionalSkillTitle
-            }}</n-text>
-            <n-divider class="personal-information-divider-style" />
-            <n-flex>
-              <n-tag
-                v-for="tag in personalInformation.professionalSkillList"
-                :key="tag.tagText"
-                class="professional-skill-tag-style"
-              >
-                <n-text class="personal-information-text-style">{{
-                  tag.tagText
-                }}</n-text>
-              </n-tag>
-            </n-flex>
-          </n-flex>
-        </n-card>
-      </component>
-      <component
-        :is="motion.div"
-        v-bind="personalInformationCardMotion"
-        class="personal-information-card-wrapper"
-      >
-        <n-card class="personal-information-card-style">
-          <n-flex vertical>
-            <n-text class="personal-information-title-text-style">{{
-              personalInformation.contactInformationTitle
-            }}</n-text>
+            <n-text class="personal-information-title-text-style">
+              {{ resume.contactInformationTitle }}
+            </n-text>
             <n-divider class="personal-information-divider-style" />
             <n-flex
-              v-for="tag in personalInformation.contactInformationList"
-              :key="tag.tagText"
+              v-for="item in resume.contactInformationList"
+              :key="item.label"
+              class="contact-item"
             >
-              <n-text class="personal-information-text-style">{{
-                tag.tagText
-              }}</n-text>
+              <n-text class="personal-information-text-style">
+                <template v-if="item.href">
+                  <a
+                    :href="item.href"
+                    :target="isExternalLink(item.href) ? '_blank' : undefined"
+                    rel="noopener noreferrer"
+                    class="contact-link"
+                  >
+                    {{ item.label }}：{{ item.value }}
+                  </a>
+                </template>
+                <template v-else>{{ item.label }}：{{ item.value }}</template>
+              </n-text>
             </n-flex>
+            <a
+              :href="`${baseUrl}resume.pdf`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="resume-download-link"
+            >
+              下载 PDF 简历
+            </a>
           </n-flex>
         </n-card>
       </component>
+
     </n-flex>
-    <n-flex vertical class="personal-introduction-style">
-      <n-flex vertical>
-        <component
-          :is="motion.div"
-          v-bind="personalIntroductionDivideMotion"
-          class="personal-information-card-wrapper"
+
+    <n-flex vertical :size="8" class="personal-introduction-style">
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.summaryTitle" />
+      </component>
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <InfoCard :contents="[resume.summary]" />
+      </component>
+
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.educationExperienceTitle" />
+      </component>
+      <component
+        v-for="educationExperience in resume.educationExperienceList"
+        :key="educationExperience.title"
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <InfoCard
+          :title="educationExperience.title"
+          :contents="educationExperience.contents"
+        />
+      </component>
+
+
+
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.personalSkillTitle" />
+      </component>
+      <component
+        v-for="personalSkill in resume.personalSkillList"
+        :key="personalSkill.title"
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <InfoCard
+          :title="personalSkill.title"
+          :contents="personalSkill.contents"
+        />
+      </component>
+
+
+
+
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.projectExperienceTitle" />
+      </component>
+      <component
+        v-for="project in resume.projectExperienceList"
+        :key="project.title"
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <ProjectCard :project="project" />
+      </component>
+
+      
+
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.competitionExperienceTitle" />
+      </component>
+      <component
+        v-for="(competitionExperience, index) in resume.competitionExperienceList"
+        :key="index"
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <InfoCard
+          :title="competitionExperience.title"
+          :contents="competitionExperience.contents"
+        />
+      </component>
+
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionDivideMotion"
+      >
+        <SectionDivider :title="resume.workTitle" />
+      </component>
+      <component
+        :is="motion.div"
+        v-bind="personalIntroductionCardMotion"
+        class="personal-introduction-card-wrapper-style"
+      >
+        <n-card
+          v-if="currentWork"
+          :title="currentWork.title"
+          class="personal-introduction-card-style"
         >
-          <n-divider
-            title-placement="center"
-            class="personal-introduction-divider-style"
-          >
-            <n-text class="personal-introduction-title-text-style">{{
-              personalInformation.educationExperienceTitle
-            }}</n-text>
-          </n-divider>
-        </component>
-        <n-flex
-          vertical
-          v-for="educationExperience in personalInformation.educationExperienceList"
-        >
-          <component
-            :is="motion.div"
-            v-bind="personalIntroductionCardMotion"
-            class="personal-introduction-card-wrapper-style"
-          >
-            <n-card
-              :title="educationExperience.titleText"
-              class="personal-introduction-card-style"
-            >
-              <component
-                :is="motion.div"
-                v-bind="personalIntroductionCardTextMotion"
-              >
-                <n-flex vertical>
-                  <n-text
-                    v-for="content in educationExperience.contentTextList"
-                    class="personal-introduction-text-style"
-                    >{{ content }}</n-text
-                  >
-                </n-flex>
-              </component>
-            </n-card>
-          </component>
-        </n-flex>
-        <component
-          :is="motion.div"
-          v-bind="personalIntroductionDivideMotion"
-          class="personal-information-card-wrapper"
-        >
-          <n-divider
-            title-placement="center"
-            class="personal-introduction-divider-style"
-          >
-            <n-text class="personal-introduction-title-text-style">{{
-              personalInformation.personalSkillTitle
-            }}</n-text>
-          </n-divider>
-        </component>
-        <n-flex
-          vertical
-          v-for="personalSkill in personalInformation.personalSkillList"
-        >
-          <component
-            :is="motion.div"
-            v-bind="personalIntroductionCardMotion"
-            class="personal-introduction-card-wrapper-style"
-          >
-            <n-card
-              :title="personalSkill.titleText"
-              class="personal-introduction-card-style"
-            >
-              <component
-                :is="motion.div"
-                v-bind="personalIntroductionCardTextMotion"
-              >
-                <n-flex vertical>
-                  <n-text
-                    v-for="content in personalSkill.contentTextList"
-                    class="personal-introduction-text-style"
-                    >{{ content }}</n-text
-                  >
-                </n-flex>
-              </component>
-            </n-card>
-          </component>
-        </n-flex>
-        <component
-          :is="motion.div"
-          v-bind="personalIntroductionDivideMotion"
-          class="personal-information-card-wrapper"
-        >
-          <n-divider
-            title-placement="center"
-            class="personal-introduction-divider-style"
-          >
-            <n-text class="personal-introduction-title-text-style">{{
-              personalInformation.competitionExperienceTitle
-            }}</n-text>
-          </n-divider>
-        </component>
-        <n-flex
-          vertical
-          v-for="competitionExperience in personalInformation.competitionExperienceList"
-        >
-          <component
-            :is="motion.div"
-            v-bind="personalIntroductionCardMotion"
-            class="personal-introduction-card-wrapper-style"
-          >
-            <n-card
-              :title="competitionExperience.titleText"
-              class="personal-introduction-card-style"
-            >
-              <component
-                :is="motion.div"
-                v-bind="personalIntroductionCardTextMotion"
-              >
-                <n-flex vertical>
-                  <n-text
-                    v-for="content in competitionExperience.contentTextList"
-                    class="personal-introduction-text-style"
-                    >{{ content }}</n-text
-                  >
-                </n-flex>
-              </component>
-            </n-card>
-          </component>
-        </n-flex>
-        <component
-          :is="motion.div"
-          v-bind="personalIntroductionDivideMotion"
-          class="personal-information-card-wrapper"
-        >
-          <n-divider
-            title-placement="center"
-            class="personal-introduction-divider-style"
-          >
-            <n-text class="personal-introduction-title-text-style">{{
-              personalInformation.workTitle
-            }}</n-text>
-          </n-divider>
-        </component>
-        <component
-          :is="motion.div"
-          v-bind="personalIntroductionCardMotion"
-          class="personal-introduction-card-wrapper-style"
-        >
-          <n-card
-            :title="
-              personalInformation.workList[personalInformation.currentWorkIndex]
-                ?.title
-            "
-            class="personal-introduction-card-style"
-          >
-            <iframe
-              :src="
-                personalInformation.workList[
-                  personalInformation.currentWorkIndex
-                ]?.src
-              "
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              sandbox="allow-scripts allow-same-origin"
-              class="carousel-video-style"
-            ></iframe>
-            <n-flex justify="space-around">
-              <n-button
-                @click="personalInformation.turnToPreviousWork()"
-                class="button-style"
-              >
-                <n-text>上一个</n-text>
-              </n-button>
-              <n-button
-                @click="personalInformation.turnToNextWork()"
-                class="button-style"
-              >
-                <n-text>下一个</n-text>
-              </n-button>
-            </n-flex>
-            <n-text>{{
-              personalInformation.workList[personalInformation.currentWorkIndex]
-                ?.description
-            }}</n-text>
-          </n-card>
-        </component>
-      </n-flex>
+          <iframe
+            :src="currentWork.src"
+            :title="currentWork.title"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin"
+            class="carousel-video-style"
+          ></iframe>
+          <n-flex justify="space-around" class="video-controls">
+            <n-button class="button-style" @click="previousWork">
+              <n-text>上一个</n-text>
+            </n-button>
+            <n-button class="button-style" @click="nextWork">
+              <n-text>下一个</n-text>
+            </n-button>
+          </n-flex>
+          <n-text class="personal-introduction-text-style">
+            {{ currentWork.description }}
+          </n-text>
+        </n-card>
+      </component>
     </n-flex>
   </n-flex>
 </template>
 
 <script setup lang="ts">
 import { motion } from "motion-v";
-import { NFlex, NImage, NText, NTag, NDivider, NCard, NButton } from "naive-ui";
-import { ref, onMounted, onUnmounted } from "vue";
-import type { Ref } from "vue";
+import { NButton, NCard, NDivider, NFlex, NImage, NText, NTag } from "naive-ui";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import profileImage from "./assets/image/profile.jpg";
+import InfoCard from "./components/InfoCard.vue";
+import ProjectCard from "./components/ProjectCard.vue";
+import SectionDivider from "./components/SectionDivider.vue";
+import { resume } from "./resume";
+
+const baseUrl = import.meta.env.BASE_URL;
 
 const profileMotion = ref({
   initial: { x: 0, y: 0, scale: 0, opacity: 0, rotate: -180 },
@@ -316,100 +284,53 @@ const personalIntroductionCardMotion = ref({
   transition: { duration: 0.5, delay: 0 },
   whileHover: { y: -10, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" },
 });
-const personalIntroductionCardTextMotion = ref({
-  initial: { x: 0, y: 0, opacity: 0 },
-  whileInView: { x: 0, y: 0, opacity: 1 },
-  transition: { duration: 0.5, delay: 0 },
-});
 
 const mainLayout = ref({
   vertical: false,
 });
 
+const isExternalLink = (href?: string) => Boolean(href?.startsWith("http"));
+
+const applyMotionDirection = (mobile: boolean) => {
+  const initial = mobile ? { x: -150, y: 0 } : { x: 0, y: 150 };
+  const inView = { x: 0, y: 0 };
+
+  profileMotion.value.initial = {
+    ...initial,
+    scale: 0,
+    opacity: 0,
+    rotate: -180,
+  };
+  profileMotion.value.whileInView = {
+    ...inView,
+    scale: 1,
+    opacity: 1,
+    rotate: 0,
+  };
+  nameMotion.value.initial = {
+    ...initial,
+    scale: 0,
+    opacity: 0,
+    rotate: -180,
+  };
+  nameMotion.value.whileInView = {
+    ...inView,
+    scale: 1,
+    opacity: 1,
+    rotate: 0,
+  };
+  personalInformationCardMotion.value.initial = { ...initial, opacity: 0 };
+  personalInformationCardMotion.value.whileInView = { ...inView, opacity: 1 };
+  personalIntroductionDivideMotion.value.initial = { ...initial, opacity: 0 };
+  personalIntroductionDivideMotion.value.whileInView = { ...inView, opacity: 1 };
+  personalIntroductionCardMotion.value.initial = { ...initial, opacity: 0 };
+  personalIntroductionCardMotion.value.whileInView = { ...inView, opacity: 1 };
+};
+
 const updateLayout = () => {
-  mainLayout.value.vertical = window.innerWidth <= 600;
-  if (mainLayout.value.vertical) {
-    profileMotion.value.initial = {
-      x: -150,
-      y: 0,
-      scale: 0,
-      opacity: 0,
-      rotate: -180,
-    };
-    nameMotion.value.whileInView = {
-      x: 0,
-      y: 0,
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-    };
-
-    nameMotion.value.initial = {
-      x: -150,
-      y: 0,
-      scale: 0,
-      opacity: 0,
-      rotate: -180,
-    };
-    nameMotion.value.whileInView = {
-      x: 0,
-      y: 0,
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-    };
-
-    personalInformationCardMotion.value.initial = { x: -150, y: 0, opacity: 0 };
-    personalInformationCardMotion.value.whileInView = {
-      x: 0,
-      y: 0,
-      opacity: 1,
-    };
-
-    personalIntroductionDivideMotion.value.initial = {
-      x: -150,
-      y: 0,
-      opacity: 0,
-    };
-    personalIntroductionDivideMotion.value.whileInView = {
-      x: 0,
-      y: 0,
-      opacity: 1,
-    };
-
-    personalIntroductionCardMotion.value.initial = {
-      x: -150,
-      y: 0,
-      opacity: 0,
-    };
-    personalIntroductionCardMotion.value.whileInView = {
-      x: 0,
-      y: 0,
-      opacity: 1,
-    };
-  } else {
-    profileMotion.value.initial = {
-      x: 0,
-      y: 0,
-      scale: 0,
-      opacity: 0,
-      rotate: -180,
-    };
-    nameMotion.value.initial = {
-      x: 0,
-      y: 0,
-      scale: 0,
-      opacity: 0,
-      rotate: -180,
-    };
-    personalInformationCardMotion.value.initial = { x: 0, y: 150, opacity: 0 };
-    personalIntroductionDivideMotion.value.initial = {
-      x: 0,
-      y: 150,
-      opacity: 0,
-    };
-    personalIntroductionCardMotion.value.initial = { x: 0, y: 150, opacity: 0 };
-  }
+  const mobile = window.innerWidth <= 600;
+  mainLayout.value.vertical = mobile;
+  applyMotionDirection(mobile);
 };
 
 onMounted(() => {
@@ -421,236 +342,30 @@ onUnmounted(() => {
   window.removeEventListener("resize", updateLayout);
 });
 
-class CardInformation {
-  titleText: string;
-  contentTextList: string[];
-  constructor(titleText: string, contentTextList: string[]) {
-    this.titleText = titleText;
-    this.contentTextList = contentTextList;
-  }
-}
+const currentWorkIndex = ref(0);
+const currentWork = computed(() => resume.workList[currentWorkIndex.value]);
 
-class TagInformation {
-  tagText: string;
-  constructor(tagText: string) {
-    this.tagText = tagText;
-  }
-}
+const nextWork = () => {
+  if (!resume.workList.length) return;
+  currentWorkIndex.value =
+    (currentWorkIndex.value + 1) % resume.workList.length;
+};
 
-class BiliBiliVideoInformation {
-  src: string;
-  title: string;
-  description: string;
-  constructor(src: string, title: string, description: string) {
-    this.src = src;
-    this.title = title;
-    this.description = description;
-  }
-}
-
-class PersonalInformation {
-  public name: string;
-  public basicInformationTitle: string;
-  public basicInformationList: TagInformation[];
-  public professionalSkillTitle: string;
-  public professionalSkillList: TagInformation[];
-  public contactInformationTitle: string;
-  public contactInformationList: TagInformation[];
-  public educationExperienceTitle: string;
-  public educationExperienceList: CardInformation[];
-  public personalSkillTitle: string;
-  public personalSkillList: CardInformation[];
-  public competitionExperienceTitle: string;
-  public competitionExperienceList: CardInformation[];
-  public workTitle: string;
-  public workList: BiliBiliVideoInformation[];
-  public currentWorkIndex: number;
-  constructor() {
-    this.name = "";
-    this.basicInformationTitle = "";
-    this.basicInformationList = [];
-    this.professionalSkillTitle = "";
-    this.professionalSkillList = [];
-    this.contactInformationTitle = "";
-    this.contactInformationList = [];
-    this.educationExperienceTitle = "";
-    this.educationExperienceList = [];
-    this.personalSkillTitle = "";
-    this.personalSkillList = [];
-    this.competitionExperienceTitle = "";
-    this.competitionExperienceList = [];
-    this.workTitle = "";
-    this.workList = [];
-    this.currentWorkIndex = 0;
-  }
-
-  turnToNextWork() {
-    this.currentWorkIndex++;
-    if (this.currentWorkIndex >= this.workList.length) {
-      this.currentWorkIndex = 0;
-    }
-  }
-  turnToPreviousWork() {
-    this.currentWorkIndex--;
-    if (this.currentWorkIndex < 0) {
-      this.currentWorkIndex = this.workList.length - 1;
-    }
-  }
-}
-
-const personalInformation: Ref<PersonalInformation> = ref(
-  new PersonalInformation(),
-);
-personalInformation.value.name = "黄昆程";
-personalInformation.value.basicInformationTitle = "基本信息";
-personalInformation.value.basicInformationList.push(
-  new TagInformation("姓名:黄昆程"),
-);
-personalInformation.value.basicInformationList.push(
-  new TagInformation("院校:长安大学"),
-);
-personalInformation.value.basicInformationList.push(
-  new TagInformation("学历:2024级 本科"),
-);
-personalInformation.value.basicInformationList.push(
-  new TagInformation("专业:道路桥梁与渡河工程(国际工程班)"),
-);
-personalInformation.value.basicInformationList.push(
-  new TagInformation("求职意向：工程软件开发/数字化实习"),
-);
-personalInformation.value.basicInformationList.push(
-  new TagInformation("当前状态：在校在读，可实习"),
-);
-personalInformation.value.professionalSkillTitle = "专业技能";
-personalInformation.value.professionalSkillList.push(
-  new TagInformation("CAD开发"),
-);
-personalInformation.value.professionalSkillList.push(
-  new TagInformation("BIM开发")
-);
-personalInformation.value.professionalSkillList.push(
-  new TagInformation("Agent开发")
-);
-personalInformation.value.professionalSkillList.push(
-  new TagInformation("力学分析"),
-);
-personalInformation.value.professionalSkillList.push(
-  new TagInformation("建模与可视化"),
-);
-
-personalInformation.value.contactInformationTitle = "联系方式";
-personalInformation.value.contactInformationList.push(
-  new TagInformation("邮箱:2024903811@chd.edu.cn"),
-);
-personalInformation.value.contactInformationList.push(
-  new TagInformation("电话:13976639743"),
-);
-personalInformation.value.contactInformationList.push(
-  new TagInformation("微信:RdJ7748h"),
-);
-personalInformation.value.contactInformationList.push(
-  new TagInformation("QQ:494212901"),
-);
-personalInformation.value.contactInformationList.push(
-  new TagInformation("Github:https://github.com/HKC7748"),
-);
-personalInformation.value.educationExperienceTitle = "教育经历";
-personalInformation.value.educationExperienceList.push(
-  new CardInformation("长安大学", [
-    "2024级 | 公路学院 | 道路桥梁与渡河工程(国际工程班) | 本科",
-    "主修课程:高等数学、深度学习与机器学习、线性代数、工程力学、测量学、结构设计原理等。",
-  ]),
-);
-personalInformation.value.personalSkillTitle = "个人技能";
-personalInformation.value.personalSkillList.push(
-  new CardInformation("工程软件开发", [
-    "AutoCAD二次开发：掌握C#与WPF框架，可开发复杂交互的桌面应用。了解AutoCAD .NET API二次开发，具备从图形操作、三维建模到服务封装的完整能力，能为专业工程软件开发功能扩展与自动化工具。",
-    "科学计算：熟练运用C++和Python进行数值计算、算法开发与数据可视化，能够将线性代数、图形学原理转化为实际算法，服务于科学研究与工程问题分析。",
-  ]),
-);
-personalInformation.value.personalSkillList.push(
-  new CardInformation("工程建模、可视化与数字化", [
-    "工程建模：熟练运用 AutoCAD、Revit、Civil 3D 进行建筑与基础设施的二维制图与三维信息模型搭建；掌握 SketchUp、SolidWorks，具备从概念设计到精细三维模型构建的能力，支持产品、结构与建筑的专业表达。",
-    "可视化呈现：掌握 D5 Render、Enscape 等工具，能将三维模型转化为高质量的效果图、动画及交互式漫游，直接服务于设计展示、方案汇报与数字化交付。",
-  ]),
-);
-personalInformation.value.competitionExperienceTitle = "竞赛经历";
-personalInformation.value.competitionExperienceList.push(
-  new CardInformation("", [
-    "全国大学生先进成图技术与产品信息建模创新大赛 (国一等奖)",
-    "中交公规院杯”2025世界大学生桥梁设计大赛 (国三等奖)",
-    "全国大学生物理实验竞赛 (省一等奖)",
-    "全国大学生物理学术竞赛 (省一等奖)",
-  ]),
-);
-personalInformation.value.workTitle = "作品展示";
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1vXVG6aEui&page=1",
-    "AI桥梁生成工具",
-    "这是一个基于AutoCAD .NET API开发的智能CAD桥梁生成工具。该工具利用本地部署的大模型解析用户自然语言指令，自动调用参数化算法与预设模板，实现桥梁构件的智能生成与装配。核心技术涵盖 AutoCAD .NET API、WPF 界面开发及大模型 API 集成。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1vXVG6aE3D&page=1",
-    "AutoCAD桥梁参数化建模",
-    "使用C#基于AutoCAD .NET API开发的桥梁参数化设计插件。通过WPF对话框输入T梁、柱式墩等构件参数,自动批量生成三维实体模型与二维构造图;采用Jig拖放交互定位,利用扩展字典持久化参数,支持构件的编辑与更新。设计Core/Tool分层架构,封装命令分发、事件管理、图层样式初始化等公共框架,并提供项目管理器、属性编辑器、日志三个停靠面板,实现桥梁构件的统一管理。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1wqVG6CESM&page=1",
-    "质点-弹簧系统振动模拟工具",
-    "这是一个基于Pymunk物理引擎和DearPyGui的质点-弹簧系统振动模拟工具，核心技术包括物理建模、实时模拟、傅里叶分析、数据可视化以及交互式图形界面设计，完整实现了从物理仿真到振动分析的全流程。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1A8j76eEby&page=1",
-    "车辆检测与交通分析系统",
-    "这是一个基于 YOLOv8 的视频车辆检测系统，集成 PySide6 图形界面，支持检测计划配置、高效检测与可视化。核心功能包括车辆检测跟踪、透视/逆透视变换、卡尔曼滤波轨迹拟合，以及车道级时间/空间占有率、流量、排队长度等交通参数的统计分析。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1kiVG6VEDm&page=1",
-    "3维地球模型可视化系统",
-    "这是一个利用二维平面模拟并渲染三维地球模型可视化系统。通过数学模型构建球体网格，并应用纹理贴图、三维旋转变换和透视投影，将三维坐标实时计算并绘制到二维的Pygame窗口或Turtle画布中，实现了动态、交互式的三维可视化效果。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1iQVG6AEFA&page=1",
-    "3维图形可视化系统",
-    "这是一个基于linter的3D图形可视化系统，核心技术涉及三维几何建模、坐标变换、视图投影以及深度排序算法以实现正确的遮挡关系。完整演示了计算机图形学中从建模到渲染的基本管线流程。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1RXVG6aEx5&page=1",
-    "CAD点阵文本生成器",
-    "这是一个基于WPF MVVM架构的AutoCAD二次开发项目，核心技术涉及使用C#和WPF构建图形用户界面，通过MathNet.Numerics进行矩阵运算实现字符到点阵的转换映射，利用AutoCAD .NET API进行三维实体建模，实现了从文本输入到三维立方体阵列的自动化生成功能。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1kqVG6kE18&page=1",
-    "PyQt6图像格式转换工具",
-    "这是一个基于PyQt6的图像格式转换工具，核心技术涉及使用PIL库进行图像处理，通过PyQt6构建图形用户界面实现文件管理、预览和批量操作。系统采用事件驱动架构处理用户交互，实现了图像信息的元数据提取和批量格式转换功能，完整展示了从图像读取到格式转换的完整处理流程。",
-  ),
-);
-personalInformation.value.workList.push(
-  new BiliBiliVideoInformation(
-    "//player.bilibili.com/player.html?bvid=BV1CiVG6VEHA&page=1",
-    "SolidWorks乐高车辆模型",
-    "这是很久之前用solidworks做的一个以乐高为原型的车辆,感觉挺好玩的",
-  ),
-);
+const previousWork = () => {
+  if (!resume.workList.length) return;
+  currentWorkIndex.value =
+    (currentWorkIndex.value - 1 + resume.workList.length) %
+    resume.workList.length;
+};
 </script>
+
 <style scoped>
 .main-style {
   width: 100%;
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 18px 45px rgba(20, 40, 60, 0.18);
 }
 
 .personal-information-divider-style {
@@ -658,42 +373,64 @@ personalInformation.value.workList.push(
   margin: 5px 0;
 }
 
-.personal-introduction-divider-style {
-  width: 90%;
-  margin: 5px auto;
-}
-
 .personal-information-style {
   background-color: #1f3850;
   flex: 2;
+  min-width: 0;
+  padding: 10px 0 24px;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.personal-information-style::-webkit-scrollbar {
+  width: 0;
 }
 
 .personal-introduction-style {
   background-color: #ffffff;
   flex: 5;
+  min-width: 0;
+  padding: 22px 0 36px;
 }
 
 .profile-wrapper {
-  margin: 50px auto;
-  width: 200px;
-  height: 200px;
+  margin: 24px auto 8px;
+  align-items: center;
+  width: 100%;
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
 }
 
 .name-text-style {
-  font-size: 30px;
+  margin: 8px auto 0;
+  font-size: 26px;
   color: #ffffff;
-  margin: 0 auto;
+}
+
+.profile-skill-tags {
+  width: 100%;
+  margin-top: 12px;
+  padding: 0 14px;
+  flex-wrap: wrap;
+}
+
+.profile-skill-tag {
+  background-color: #334b6f;
+  color: #ffffff;
 }
 
 .personal-information-card-wrapper {
-  margin: auto;
+  min-width: 0;
+  margin: 0 auto;
   width: 90%;
 }
 
@@ -701,18 +438,49 @@ personalInformation.value.workList.push(
   background-color: #274766;
 }
 
+.personal-information-card-style :deep(.n-card__content) {
+  padding: 18px 20px;
+}
+
 .personal-information-title-text-style {
-  font-size: 25px;
+  font-size: 23px;
   color: #ffffff;
 }
 
 .personal-information-text-style {
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.professional-skill-tag-style {
-  background-color: #334b6f;
+.contact-item {
+  width: 100%;
+}
+
+.contact-link {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.contact-link:hover {
+  border-bottom-color: #ffffff;
+}
+
+.resume-download-link {
+  display: block;
+  margin-top: 10px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resume-download-link:hover {
+  color: #dbe7f3;
 }
 
 .personal-introduction-card-style {
@@ -722,22 +490,91 @@ personalInformation.value.workList.push(
 
 .personal-introduction-card-wrapper-style {
   background-color: #ffffff;
+  min-width: 0;
   margin: 0 auto;
   width: 90%;
-}
-
-.personal-introduction-title-text-style {
-  font-size: 25px;
-  color: #020202;
 }
 
 .personal-introduction-text-style {
   font-size: 15px;
   color: #000000;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .carousel-video-style {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.video-controls {
+  margin: 12px 0;
+}
+
+.button-style {
+  min-width: 96px;
+}
+
+@media (max-height: 820px) and (min-width: 601px) {
+  .personal-information-style {
+    position: static;
+    align-self: stretch;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-style {
+    max-width: none;
+    box-shadow: none;
+  }
+
+  .personal-information-style,
+  .personal-introduction-style {
+    width: 100%;
+    flex: none;
+  }
+
+  .personal-information-style {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 20px 0;
+  }
+
+  .personal-introduction-style {
+    padding: 10px 0 30px;
+  }
+
+  .profile-wrapper {
+    margin: 24px auto 8px;
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 130px;
+    height: 130px;
+  }
+
+  .name-text-style {
+    font-size: 24px;
+  }
+
+  .personal-information-card-wrapper,
+  .personal-introduction-card-wrapper-style {
+    width: 94%;
+  }
+
+  .personal-information-title-text-style {
+    font-size: 21px;
+  }
+
+  .personal-information-text-style,
+  .personal-introduction-text-style {
+    font-size: 14px;
+  }
 }
 </style>
