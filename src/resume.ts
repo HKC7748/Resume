@@ -185,7 +185,7 @@ export const resume: ResumeData = {
       ],
     },
   ],
-  competitionExperienceTitle: "竞赛荣誉",
+  competitionExperienceTitle: "荣誉奖励",
   competitionExperienceList: [
     {
       title: "",
@@ -193,7 +193,7 @@ export const resume: ResumeData = {
         "全国大学生先进成图技术与产品信息建模创新大赛（全国一等奖）",
         "“中交公规院杯”2025 世界大学生桥梁设计大赛（全国三等奖）",
         "全国大学生物理实验竞赛（陕西省一等奖）",
-        "全国大学生物理学术竞赛（陕西省一等奖）",
+        "交通视频流车辆检测分析系统 V1.0 (登记号:2026SR111516) ",
       ],
     },
   ],

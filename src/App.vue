@@ -87,14 +87,6 @@
                 <template v-else>{{ item.label }}：{{ item.value }}</template>
               </n-text>
             </n-flex>
-            <a
-              :href="`${baseUrl}resume.pdf`"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="resume-download-link"
-            >
-              下载 PDF 简历
-            </a>
           </n-flex>
         </n-card>
       </component>
@@ -467,21 +459,6 @@ const previousWork = () => {
 
 .contact-link:hover {
   border-bottom-color: #ffffff;
-}
-
-.resume-download-link {
-  display: block;
-  margin-top: 10px;
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.resume-download-link:hover {
-  color: #dbe7f3;
 }
 
 .personal-introduction-card-style {
